@@ -20,5 +20,3 @@ libraryDependencies ++= Seq(
 testFrameworks += new TestFramework("org.scalameter.ScalaMeterFramework")
 
 logBuffered := false
-
-testOptions in Test += Tests.Argument("-CresultDir results")

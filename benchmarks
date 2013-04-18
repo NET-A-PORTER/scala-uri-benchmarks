@@ -1,0 +1,4 @@
+#!/usr/bin/env bash
+
+sbt "test-only *.ParsingBenchmark -- -CresultDir results/parsing"
+sbt "test-only *.RenderingBenchmark -- -CresultDir results/rendering"

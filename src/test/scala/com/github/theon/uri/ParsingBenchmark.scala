@@ -23,7 +23,7 @@ object ParsingBenchmark extends PerformanceTest {
   lazy val reporter = HtmlReporter(HtmlReporter.Renderer.Info(), HtmlReporter.Renderer.BigO(), HtmlReporter.Renderer.Chart(ChartFactory.XYLine()))
   lazy val persistor = Persistor.None
 
-  val lengths = Gen.range("size")(1, 5000, 500)
+  val lengths = Gen.range("String Length")(1, 2000, 200)
   val testData = lengths.map(i => Random.alphanumeric.take(i).mkString)
 
   val testLongPaths = testData.map(data => "/" + data)
@@ -31,6 +31,11 @@ object ParsingBenchmark extends PerformanceTest {
   val testLongQueryKeys = testData.map(data => "http://example.com?" + data + "=value")
   val testLongQueryValues = testData.map(data => "http://example.com?key=" + data)
 
+  val numQueryStrings = Gen.range("Num of Query String Pairs")(1, 2000, 200)
+
+  val testNumQueryString = numQueryStrings.map(data =>
+    "http://example.com?" + (1 until data).map(i => s"key$i=val$i").mkString("&")
+  )
 
   performance of "Uri Parsing" config (api.exec.benchRuns -> 10) in {
 
@@ -54,6 +59,12 @@ object ParsingBenchmark extends PerformanceTest {
 
     measure method "query string value length" in {
       using(testLongQueryValues) in {
+        uri => parseUri(uri)
+      }
+    }
+
+    measure method "number of query string pairs" in {
+      using(testNumQueryString) in {
         uri => parseUri(uri)
       }
     }
