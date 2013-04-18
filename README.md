@@ -17,7 +17,7 @@ Performance tests can be run by running the `./benchmarks` script in the project
  * [Query String Key Length](#query-string-key-length)
  * [Query String Value Length](#query-string-value-length)
  * [Number of Query String parameters](#number-of-quer-string-parameters)
-* [Parsing Time](#rendering-time)
+* [toString Rendering Time](#tostring-rendering-time)
  * [Path Length](#path-length-1)
  * [Hostname Length](#hostname-length-1)
  * [Query String Key Length](#query-string-key-length-1)
