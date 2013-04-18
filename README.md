@@ -16,13 +16,13 @@ Performance tests can be run by running the `./benchmarks` script in the project
  * [Hostname Length](#hostname-length)
  * [Query String Key Length](#query-string-key-length)
  * [Query String Value Length](#query-string-value-length)
- * [Number of Query String parameters](#number-of-quer-string-parameters)
+ * [Number of Query String parameters](#number-of-query-string-parameters)
 * [toString Rendering Time](#tostring-rendering-time)
  * [Path Length](#path-length-1)
  * [Hostname Length](#hostname-length-1)
  * [Query String Key Length](#query-string-key-length-1)
  * [Query String Value Length](#query-string-value-length-1)
- * [Number of Query String parameters](#number-of-quer-string-parameters-1)
+ * [Number of Query String parameters](#number-of-query-string-parameters-1)
 
 ## Parsing Time
 
