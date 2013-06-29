@@ -1,18 +1,20 @@
 package com.github.theon.uri
 
+import java.util.UUID
+
 /**
  * Unlike the ParsingBenchmark and RenderingBenchmark objects, this runs in the same JVM as SBT which makes it
  * easier to profile
  */
 object BasicProfiling extends App {
 
-  val uri = "http://example.com?key=value"
-
-  val durations = (0 to 10000000).map(_ => {
-    val before = System.currentTimeMillis.toDouble
+  val durations = (0 to 1000000).map(_ => {
+    val uri = "http://example.com?key=" + UUID.randomUUID().toString
+    val before = System.nanoTime
     Uri.parseUri(uri)
-    System.currentTimeMillis.toDouble - before
+    System.nanoTime - before
   })
 
-  println(durations.sum / durations.size.toDouble)
+  //Outputs about 7000 on a Macbook Pro
+  println(durations.sum.toDouble / durations.size.toDouble)
 }
