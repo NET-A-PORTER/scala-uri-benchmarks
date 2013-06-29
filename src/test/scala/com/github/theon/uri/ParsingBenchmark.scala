@@ -5,7 +5,7 @@ import execution.SeparateJvmsExecutor
 import reporting.ChartReporter.ChartFactory
 import util.Random
 import com.github.theon.uri.Uri._
-import reporting.HtmlReporter
+import org.scalameter.reporting.HtmlReporter
 import org.scalameter.Executor.Measurer
 /**
  * Date: 14/04/2013
