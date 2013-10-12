@@ -12,9 +12,9 @@ resolvers += "Sonatype OSS Snapshots" at
   "https://oss.sonatype.org/content/repositories/snapshots"
 
 libraryDependencies ++= Seq(
-  "com.github.theon" %% "scala-uri" % "0.3.5",
+  "com.github.theon" %% "scala-uri" % "0.3.6",
   "org.parboiled" %% "parboiled-scala" % "1.1.4",
-   "com.github.axel22" %% "scalameter" % "0.3"
+  "com.github.axel22" %% "scalameter" % "0.4-M2"
  )
 
 testFrameworks += new TestFramework("org.scalameter.ScalaMeterFramework")

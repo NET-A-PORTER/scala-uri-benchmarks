@@ -3,9 +3,10 @@ package com.github.theon.uri
 import org.scalameter._
 import org.scalameter.execution.SeparateJvmsExecutor
 import org.scalameter.Executor.Measurer
-import org.scalameter.reporting.HtmlReporter
+import org.scalameter.reporting.{RegressionReporter, HtmlReporter}
 import org.scalameter.reporting.ChartReporter.ChartFactory
 import util.Random
+import org.scalameter.persistence.SerializationPersistor
 
 /**
  * Date: 14/04/2013
@@ -15,13 +16,19 @@ object RenderingBenchmark extends PerformanceTest {
 
   lazy val executor = SeparateJvmsExecutor(
     Executor.Warmer.Default(),
-    Aggregator.average,
+    Aggregator.complete(Aggregator.average),
     new Measurer.IgnoringGC
   )
   //lazy val reporter = new LoggingReporter
   //lazy val reporter = ChartReporter(ChartFactory.XYLine())
-  lazy val reporter = HtmlReporter(HtmlReporter.Renderer.Info(), HtmlReporter.Renderer.BigO(), HtmlReporter.Renderer.Chart(ChartFactory.XYLine()))
-  lazy val persistor = Persistor.None
+  lazy val reporter = Reporter.Composite(
+    new RegressionReporter(
+      RegressionReporter.Tester.ConfidenceIntervals(),
+      RegressionReporter.Historian.ExponentialBackoff()
+    ),
+    HtmlReporter(embedDsv = true)
+  )
+  lazy val persistor = new SerializationPersistor
 
   val lengths = Gen.range("String Length")(1, 20000, 2000)
   val testData = lengths.map(i => Random.alphanumeric.take(i).mkString)
@@ -37,33 +44,33 @@ object RenderingBenchmark extends PerformanceTest {
     Uri("http", "example.com", "/", Querystring((1 until data).map(i => ("key"+i, "val"+i :: Nil)).toMap))
   )
 
-  performance of "Uri Rendering" config (api.exec.benchRuns -> 36, api.exec.maxWarmupRuns -> 10) in {
+  performance of "Uri-Rendering" config (api.exec.benchRuns -> 36, api.exec.maxWarmupRuns -> 10) in {
 
-    measure method "path length" in {
+    measure method "path-length" in {
       using(testLongPaths) in {
         uri => uri.toString
       }
     }
 
-    measure method "domain length" in {
+    measure method "domain-length" in {
       using(testLongDomains) in {
         uri => uri.toString
       }
     }
 
-    measure method "query string key length" in {
+    measure method "query-string-key-length" in {
       using(testLongQueryKeys) in {
         uri => uri.toString
       }
     }
 
-    measure method "query string value length" in {
+    measure method "query-string-value-length" in {
       using(testLongQueryValues) in {
         uri => uri.toString
       }
     }
 
-    measure method "number of query string pairs" in {
+    measure method "number-of-query-string-pairs" in {
       using(testLongQueryValues) in {
         uri => uri.toString
       }

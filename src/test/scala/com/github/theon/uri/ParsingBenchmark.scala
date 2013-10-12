@@ -1,12 +1,14 @@
 package com.github.theon.uri
 
 import org.scalameter._
-import execution.SeparateJvmsExecutor
+import org.scalameter.execution.{LocalExecutor, SeparateJvmsExecutor}
 import reporting.ChartReporter.ChartFactory
 import util.Random
 import com.github.theon.uri.Uri._
-import org.scalameter.reporting.HtmlReporter
+import org.scalameter.reporting.{LoggingReporter, RegressionReporter, HtmlReporter}
 import org.scalameter.Executor.Measurer
+import org.scalameter.persistence.SerializationPersistor
+
 /**
  * Date: 14/04/2013
  * Time: 16:46
@@ -15,13 +17,19 @@ object ParsingBenchmark extends PerformanceTest {
 
   lazy val executor = SeparateJvmsExecutor(
     Executor.Warmer.Default(),
-    Aggregator.average,
+    Aggregator.complete(Aggregator.average),
     new Measurer.IgnoringGC
   )
-  //lazy val reporter = new LoggingReporter
-  //lazy val reporter = ChartReporter(ChartFactory.XYLine())
-  lazy val reporter = HtmlReporter(HtmlReporter.Renderer.Info(), HtmlReporter.Renderer.BigO(), HtmlReporter.Renderer.Chart(ChartFactory.XYLine()))
-  lazy val persistor = Persistor.None
+
+  lazy val reporter = Reporter.Composite(
+    new RegressionReporter(
+      RegressionReporter.Tester.ConfidenceIntervals(),
+      RegressionReporter.Historian.ExponentialBackoff()
+    ),
+    new LoggingReporter,
+    HtmlReporter(embedDsv = true)
+  )
+  lazy val persistor = new SerializationPersistor
 
   val lengths = Gen.range("String Length")(1, 2000, 200)
   val testData = lengths.map(i => Random.alphanumeric.take(i).mkString)
@@ -37,33 +45,33 @@ object ParsingBenchmark extends PerformanceTest {
     "http://example.com?" + (1 until data).map(i => s"key$i=val$i").mkString("&")
   )
 
-  performance of "Uri Parsing" config (api.exec.benchRuns -> 10) in {
+  performance of "Uri-Parsing" config (api.exec.benchRuns -> 10) in {
 
-    measure method "path length" in {
+    measure method "path-length" in {
       using(testLongPaths) in {
         uri => parseUri(uri)
       }
     }
 
-    measure method "domain length" in {
+    measure method "domain-length" in {
       using(testLongDomains) in {
         uri => parseUri(uri)
       }
     }
 
-    measure method "query string key length" in {
+    measure method "query-string-key-length" in {
       using(testLongQueryKeys) in {
         uri => parseUri(uri)
       }
     }
 
-    measure method "query string value length" in {
+    measure method "query-string-value-length" in {
       using(testLongQueryValues) in {
         uri => parseUri(uri)
       }
     }
 
-    measure method "number of query string pairs" in {
+    measure method "number-of-query-string-pairs" in {
       using(testNumQueryString) in {
         uri => parseUri(uri)
       }
