@@ -49,31 +49,31 @@ object ParsingBenchmark extends PerformanceTest {
 
     measure method "path-length" in {
       using(testLongPaths) in {
-        uri => parseUri(uri)
+        uri => parse(uri)
       }
     }
 
     measure method "domain-length" in {
       using(testLongDomains) in {
-        uri => parseUri(uri)
+        uri => parse(uri)
       }
     }
 
     measure method "query-string-key-length" in {
       using(testLongQueryKeys) in {
-        uri => parseUri(uri)
+        uri => parse(uri)
       }
     }
 
     measure method "query-string-value-length" in {
       using(testLongQueryValues) in {
-        uri => parseUri(uri)
+        uri => parse(uri)
       }
     }
 
     measure method "number-of-query-string-pairs" in {
       using(testNumQueryString) in {
-        uri => parseUri(uri)
+        uri => parse(uri)
       }
     }
   }

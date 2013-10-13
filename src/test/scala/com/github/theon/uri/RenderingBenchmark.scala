@@ -34,13 +34,16 @@ object RenderingBenchmark extends PerformanceTest {
 
   val testLongPaths = testData.map(data => Uri("/" + data))
   val testLongDomains = testData.map(data => Uri("http", data, ""))
-  val testLongQueryKeys = testData.map(data => Uri("/", Querystring(Map(data -> List("value")))))
-  val testLongQueryValues = testData.map(data => Uri("/", Querystring(Map("key" -> List(data)))))
+  val testLongQueryKeys = testData.map(data => Uri(query = QueryString(Vector(data -> "value"))))
+  val testLongQueryValues = testData.map(data => Uri(query = QueryString(Vector("key" -> data))))
 
   val numQueryStrings = Gen.range("Num of Query String Pairs")(1, 2000, 200)
 
   val testNumQueryString = numQueryStrings.map(data =>
-    Uri("http", "example.com", "/", Querystring((1 until data).map(i => ("key"+i, "val"+i :: Nil)).toMap))
+    Uri(scheme = "http",
+      host = "example.com",
+      query = QueryString((1 until data).toVector.map(i => ("key" + i, "val" + i)))
+    )
   )
 
   performance of "Uri-Rendering" config (api.exec.benchRuns -> 36, api.exec.maxWarmupRuns -> 10) in {

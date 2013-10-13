@@ -11,7 +11,7 @@ object BasicProfiling extends App {
   val durations = (0 to 1000000).map(_ => {
     val uri = "http://example.com?key=" + UUID.randomUUID().toString
     val before = System.nanoTime
-    Uri.parseUri(uri)
+    Uri.parse(uri)
     System.nanoTime - before
   })
 
