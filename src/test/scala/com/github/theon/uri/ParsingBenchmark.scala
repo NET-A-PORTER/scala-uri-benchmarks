@@ -45,7 +45,7 @@ object ParsingBenchmark extends PerformanceTest {
     "http://example.com?" + (1 until data).map(i => s"key$i=val$i").mkString("&")
   )
 
-  performance of "Uri-Parsing" config (api.exec.benchRuns -> 10) in {
+  performance of "Uri-Parsing" config (api.exec.benchRuns -> 36, api.exec.maxWarmupRuns -> 10) in {
 
     measure method "path-length" in {
       using(testLongPaths) in {
