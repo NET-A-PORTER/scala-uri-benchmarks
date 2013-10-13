@@ -1,4 +1,4 @@
-////Uncomment to link direct to local scala-uri code
+//Uncomment to link direct to local scala-uri code
 //import sbt._
 //
 //object ScalaUriBenchmarksBuild extends Build {
