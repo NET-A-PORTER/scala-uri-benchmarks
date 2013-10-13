@@ -19,11 +19,10 @@ object RenderingBenchmark extends PerformanceTest {
     Aggregator.complete(Aggregator.average),
     new Measurer.IgnoringGC
   )
-  //lazy val reporter = new LoggingReporter
-  //lazy val reporter = ChartReporter(ChartFactory.XYLine())
+
   lazy val reporter = Reporter.Composite(
     new RegressionReporter(
-      RegressionReporter.Tester.ConfidenceIntervals(),
+      RegressionReporter.Tester.Accepter(),
       RegressionReporter.Historian.ExponentialBackoff()
     ),
     HtmlReporter(embedDsv = true)

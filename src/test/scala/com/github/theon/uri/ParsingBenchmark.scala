@@ -23,7 +23,7 @@ object ParsingBenchmark extends PerformanceTest {
 
   lazy val reporter = Reporter.Composite(
     new RegressionReporter(
-      RegressionReporter.Tester.ConfidenceIntervals(),
+      RegressionReporter.Tester.Accepter(),
       RegressionReporter.Historian.ExponentialBackoff()
     ),
     new LoggingReporter,

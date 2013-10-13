@@ -1,7 +1,7 @@
-//Uncomment to link direct to local scala-uri code
+////Uncomment to link direct to local scala-uri code
 //import sbt._
 //
-//object ScalaUriBenchamrksBuild extends Build {
+//object ScalaUriBenchmarksBuild extends Build {
 //
 //  lazy val scalaUriBenchmarks = Project(
 //    id = "scala-uri-benchmarks",
