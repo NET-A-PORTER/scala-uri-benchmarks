@@ -13,10 +13,10 @@ Performance tests can be run by running the `./benchmarks` script in the project
 
 # 0.3.6
 
-* [Parsing Time](http://net-a-porter.github.io/scala-uri-benchmarks/parsing-0.3.6/report/)
-* [toString Rendering Time](http://net-a-porter.github.io/scala-uri-benchmarks/rendering-0.3.6/report/)
+* [Parsing Time](http://net-a-porter.github.io/scala-uri-benchmarks/parsing-0.3.6/report/index.html)
+* [toString Rendering Time](http://net-a-porter.github.io/scala-uri-benchmarks/rendering-0.3.6/report/index.html)
 
 # 0.4.0-SNAPSHOT
 
-* [Parsing Time](http://net-a-porter.github.io/scala-uri-benchmarks/parsing-0.4.0-SNAPSHOT/report/)
-* [toString Rendering Time](http://net-a-porter.github.io/scala-uri-benchmarks/rendering-0.4.0-SNAPSHOT/report/)
+* [Parsing Time](http://net-a-porter.github.io/scala-uri-benchmarks/parsing-0.4.0-SNAPSHOT/report/index.html)
+* [toString Rendering Time](http://net-a-porter.github.io/scala-uri-benchmarks/rendering-0.4.0-SNAPSHOT/report/index.html)
