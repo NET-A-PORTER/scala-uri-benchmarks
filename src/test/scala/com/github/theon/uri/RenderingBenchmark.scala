@@ -1,7 +1,7 @@
 package com.github.theon.uri
 
 import org.scalameter._
-import org.scalameter.execution.SeparateJvmsExecutor
+import org.scalameter.execution.{LocalExecutor, SeparateJvmsExecutor}
 import org.scalameter.Executor.Measurer
 import org.scalameter.reporting.{RegressionReporter, HtmlReporter}
 import org.scalameter.reporting.ChartReporter.ChartFactory
@@ -14,7 +14,7 @@ import org.scalameter.persistence.SerializationPersistor
  */
 object RenderingBenchmark extends PerformanceTest {
 
-  lazy val executor = SeparateJvmsExecutor(
+  lazy val executor = LocalExecutor(
     Executor.Warmer.Default(),
     Aggregator.complete(Aggregator.average),
     new Measurer.IgnoringGC

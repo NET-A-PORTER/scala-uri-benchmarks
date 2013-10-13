@@ -15,7 +15,7 @@ import org.scalameter.persistence.SerializationPersistor
  */
 object ParsingBenchmark extends PerformanceTest {
 
-  lazy val executor = SeparateJvmsExecutor(
+  lazy val executor = LocalExecutor(
     Executor.Warmer.Default(),
     Aggregator.complete(Aggregator.average),
     new Measurer.IgnoringGC
