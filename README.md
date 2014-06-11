@@ -11,5 +11,19 @@ Performance tests can be run by running the `./benchmarks` script in the project
 
 # Results
 
-* [Parsing Time](http://net-a-porter.github.io/scala-uri-benchmarks/rendering/report/)
-* [toString Rendering Time](#tostring-rendering-time)
+# 0.3.6
+
+* [Parsing Time](http://net-a-porter.github.io/scala-uri-benchmarks/parsing-0.3.6/report/index.html)
+* [toString Rendering Time](http://net-a-porter.github.io/scala-uri-benchmarks/rendering-0.3.6/report/index.html)
+
+# 0.4.2
+
+`scala-uri` 0.4.x upgrades from parboiled to parboiled2 which gives 2x to 3x faster parsing times.
+
+* [Parsing Time](http://net-a-porter.github.io/scala-uri-benchmarks/parsing-0.4.2/report/index.html)
+* [toString Rendering Time](http://net-a-porter.github.io/scala-uri-benchmarks/rendering-0.4.2/report/index.html)
+
+# 0.4.3-SNAPSHOT
+
+* [Parsing Time](http://net-a-porter.github.io/scala-uri-benchmarks/parsing-0.4.3-SNAPSHOT/report/index.html)
+* [toString Rendering Time](http://net-a-porter.github.io/scala-uri-benchmarks/rendering-0.4.3-SNAPSHOT/report/index.html)
