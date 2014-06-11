@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 # DATE_STR=$(date +"%Y-%m-%d")
-SCALA_URI_VER=$(cat build.sbt | grep -E "com\.github\.theon.+scala-uri" | cut -d'"' -f6)
+SCALA_URI_VER=$(cat build.sbt | grep -E "com\.netaporter.+scala-uri" | cut -d'"' -f6)
 
 sbt "test-only *.ParsingBenchmark -- -CresultDir parsing-$SCALA_URI_VER"
 sbt "test-only *.RenderingBenchmark -- -CresultDir rendering-$SCALA_URI_VER"

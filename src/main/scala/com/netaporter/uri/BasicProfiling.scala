@@ -1,4 +1,4 @@
-package com.github.theon.uri
+package com.netaporter.uri
 
 import java.util.UUID
 
