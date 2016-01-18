@@ -5,3 +5,4 @@ SCALA_URI_VER=$(cat build.sbt | grep -E "com\.netaporter.+scala-uri" | cut -d'"'
 
 sbt "test-only *.ParsingBenchmark -- -CresultDir parsing-$SCALA_URI_VER"
 sbt "test-only *.RenderingBenchmark -- -CresultDir rendering-$SCALA_URI_VER"
+sbt "test-only *.PublicSuffixBenchmark -- -CresultDir public-suffix-$SCALA_URI_VER"
