@@ -1,34 +1,14 @@
 package com.netaporter.uri
 
-import org.scalameter._
-import org.scalameter.execution.LocalExecutor
+import org.scalameter.api._
 import util.Random
 import com.netaporter.uri.Uri._
-import org.scalameter.reporting.{LoggingReporter, RegressionReporter, HtmlReporter}
-import org.scalameter.Executor.Measurer
-import org.scalameter.persistence.SerializationPersistor
 
 /**
  * Date: 14/04/2013
  * Time: 16:46
  */
-object ParsingBenchmark extends PerformanceTest {
-
-  lazy val executor = LocalExecutor(
-    Executor.Warmer.Default(),
-    Aggregator.complete(Aggregator.average),
-    new Measurer.IgnoringGC
-  )
-
-  lazy val reporter = Reporter.Composite(
-    new RegressionReporter(
-      RegressionReporter.Tester.Accepter(),
-      RegressionReporter.Historian.ExponentialBackoff()
-    ),
-    new LoggingReporter,
-    HtmlReporter(embedDsv = true)
-  )
-  lazy val persistor = new SerializationPersistor
+object ParsingBenchmark extends Bench.OfflineReport {
 
   val lengths = Gen.range("String Length")(1, 2000, 200)
   val testData = lengths.map(i => Random.alphanumeric.take(i).mkString)
@@ -44,7 +24,7 @@ object ParsingBenchmark extends PerformanceTest {
     "http://example.com?" + (1 until data).map(i => s"key$i=val$i").mkString("&")
   )
 
-  performance of "Uri-Parsing" config (api.exec.benchRuns -> 36, api.exec.maxWarmupRuns -> 10) in {
+  performance of "Uri-Parsing" config (exec.benchRuns -> 36, exec.maxWarmupRuns -> 10) in {
 
     measure method "path-length" in {
       using(testLongPaths) in {
@@ -77,3 +57,4 @@ object ParsingBenchmark extends PerformanceTest {
     }
   }
 }
+
