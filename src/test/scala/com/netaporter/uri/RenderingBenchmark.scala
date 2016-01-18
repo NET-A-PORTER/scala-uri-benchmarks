@@ -1,6 +1,5 @@
 package com.netaporter.uri
 
-import org.scalameter.Measurer
 import org.scalameter.api._
 
 import scala.util.Random
