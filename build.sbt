@@ -18,3 +18,5 @@ libraryDependencies ++= Seq(
 testFrameworks += new TestFramework("org.scalameter.ScalaMeterFramework")
 
 logBuffered := false
+
+fork := true
